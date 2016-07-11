@@ -13,10 +13,17 @@ $script = <<SCRIPT
     sudo apt-get update
     sudo apt-get install -y docker-engine
     sudo usermod -aG docker vagrant
-    sudo apt-get install -y ranger
+    sudo apt-get install -y ranger zsh
+    sudo git clone git://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
+    sudo chsh -s /bin/zsh
+    echo 'Writing in .zshrc file'
+    echo "export ZSH=/home/vagrant/.oh-my-zsh" > .zshrc
+    echo "ZSH_THEME="bira"" >> .zshrc
+    echo "plugins=(git)" >> .zshrc
+    echo 'source $ZSH/oh-my-zsh.sh' >> .zshrc
     echo 'END SCRIPT'
 SCRIPT
-
+#chsh -s /bin/zsh
 
 Vagrant.configure(2) do |config|
 
@@ -25,7 +32,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.box = "ubuntu/trusty64"
-  config.vm.network "private_network", ip: "192.168.50.10"
-  config.vm.hostname = "test"
+  config.vm.network "private_network", ip: "192.168.50.11"
+  config.vm.hostname = "vbuntu"
   config.vm.provision "shell", inline: $script
 end
