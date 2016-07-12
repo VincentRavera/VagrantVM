@@ -21,6 +21,9 @@ $script = <<SCRIPT
     echo "ZSH_THEME="bira"" >> .zshrc
     echo "plugins=(git)" >> .zshrc
     echo 'source $ZSH/oh-my-zsh.sh' >> .zshrc
+    echo 'Install dockercompose'
+    sudo curl -L https://github.com/docker/compose/releases/download/1.8.0-rc2/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
     echo 'END SCRIPT'
 SCRIPT
 #chsh -s /bin/zsh
